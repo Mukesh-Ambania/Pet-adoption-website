@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Paws Animal Shelter - Find Your Perfect Pet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --dark-bg: #2D3436;
+            --light-bg: #F5F7FA;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeIn 1s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            animation: slideUp 0.8s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: white;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: -3rem auto 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .filters-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.75rem;
+            border: 2px solid var(--light-bg);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--light-bg);
+            background: white;
+            color: var(--text-dark);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .gallery-title p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pet-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .pet-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .pet-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+
+        .pet-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .pet-badge {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .pet-type {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .pet-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-tag {
+            background: var(--light-bg);
+            color: var(--text-dark);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .pet-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .pet-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .view-btn,
+        .adopt-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .view-btn {
+            background: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        .view-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .adopt-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .adopt-btn:hover {
+            background: #E85555;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-light);
+        }
+
+        .no-results svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        .close {
+            color: var(--text-light);
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close:hover {
+            color: var(--text-dark);
+        }
+
+        /* Pet Detail View */
+        .pet-detail-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pet-detail-image {
+            width: 250px;
+            height: 250px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .pet-detail-info h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pet-detail-info p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .pet-detail-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-item {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .spec-value {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .pet-description-full {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin: 1.5rem 0;
+        }
+
+        /* Adoption Form */
+        .form-section {
+            margin-top: 2rem;
+        }
+
+        .form-section h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--light-bg);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: #E85555;
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            background: #2ecc71;
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .filters-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pet-detail-header {
+                flex-direction: column;
+            }
+
+            .pet-detail-image {
+                width: 100%;
+                height: 300px;
+            }
+
+            .pet-detail-specs {
+                grid-template-columns: 1fr;
+            }
+
+            .pets-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">🐾 Happy Paws</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#pets">Pets</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>🐶 Find Your Perfect Pet</h1>
+            <p>Give a loving animal a second chance at happiness. Browse our available pets and start your adoption journey today.</p>
+            <button class="cta-button" onclick="document.getElementById('pets').scrollIntoView({behavior: 'smooth'})">Browse Pets Now</button>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section" id="pets">
+        <div class="gallery-title">
+            <h2>Our Adoptable Pets</h2>
+            <p>Search and filter to find your perfect companion</p>
+        </div>
+        
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="typeFilter">Pet Type</label>
+                <select id="typeFilter" onchange="applyFilters()">
+                    <option value="">All Types</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="rabbit">Rabbit</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="ageFilter">Age Group</label>
+                <select id="ageFilter" onchange="applyFilters()">
+                    <option value="">All Ages</option>
+                    <option value="young">Young (0-2 years)</option>
+                    <option value="adult">Adult (2-7 years)</option>
+                    <option value="senior">Senior (7+ years)</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="breedFilter">Breed</label>
+                <input type="text" id="breedFilter" placeholder="Search by breed..." onkeyup="applyFilters()">
+            </div>
+
+            <div class="filter-group">
+                <label for="nameFilter">Search by Name</label>
+                <input type="text" id="nameFilter" placeholder="Pet name..." onkeyup="applyFilters()">
+            </div>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn" onclick="resetFilters()">Reset All Filters</button>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="pets-grid" id="petsGrid">
+            <!-- Pet cards will be inserted here -->
+        </div>
+        <div class="no-results" id="noResults" style="display: none;">
+            <p>No pets found matching your criteria. Please try adjusting your filters.</p>
+        </div>
+    </section>
+
+    <!-- Pet Detail Modal -->
+    <div id="petModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePetModal()">&times;</span>
+            <div id="petDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>&copy; 2024 Happy Paws Animal Shelter. All rights reserved.</p>
+        <p>📍 123 Pet Lane, Animal City | 📞 (555) 123-4567 | 📧 info@happypaws.com</p>
+    </footer>
+
+    <script>
+        // Pet Database
+        const pets = [
+            {
+                id: 1,
+                name: "Max",
+                type: "dog",
+                breed: "Golden Retriever",
+                age: "3 years",
+                ageGroup: "adult",
+                emoji: "🐕",
+                description: "Max is a friendly and energetic Golden Retriever who loves to play fetch and swim. Perfect for active families!",
+                fullDescription: "Max is a wonderful Golden Retriever with a heart of gold. He's incredibly friendly and loves playing fetch at the park. Max gets along great with other dogs and children. He's house-trained and knows basic commands. Max would thrive in a home with a yard and an active family that can give him the exercise and love he deserves.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 2,
+                name: "Luna",
+                type: "cat",
+                breed: "Siamese Mix",
+                age: "2 years",
+                ageGroup: "young",
+                emoji: "🐱",
+                description: "Luna is a beautiful Siamese mix with striking blue eyes. She's affectionate and loves being a lap cat.",
+                fullDescription: "Luna is a stunning Siamese mix with bright blue eyes and a playful personality. She loves interactive toys and climbing cat trees. Luna is affectionate and enjoys being petted, though she appreciates her alone time too. She's litter-trained and would do well in an apartment or house. Luna gets along well with other cats and would be a wonderful companion.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 3,
+                name: "Charlie",
+                type: "dog",
+                breed: "Labrador Mix",
+                age: "4 years",
+                ageGroup: "adult",
+                emoji: "🐕",
+                description: "Charlie is a sweet Labrador mix with endless enthusiasm. He's great with kids and loves outdoor adventures.",
+                fullDescription: "Charlie is a lovable Labrador mix who is eager to please. He's obedient, house-trained, and gets along wonderfully with children of all ages. Charlie loves swimming and long walks. He needs regular exercise to stay happy and healthy. Charlie would make an excellent family pet or companion for an active individual.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 4,
+                name: "Whiskers",
+                type: "cat",
+                breed: "Maine Coon",
+                age: "1 year",
+                ageGroup: "young",
+                emoji: "🐱",
+                description: "Whiskers is a fluffy Maine Coon kitten full of curiosity. He loves toys and exploring his surroundings.",
+                fullDescription: "Whiskers is an adorable Maine Coon kitten with a luxurious fluffy coat. He's playful and curious, always ready for a new game or adventure. Despite his size, he's gentle and social. Whiskers enjoys both playtime and cuddle time. He would be perfect for a family looking for a lifelong feline companion.",
+                vaccinated: "Yes",
+                neutered: "No"
+            },
+            {
+                id: 5,
+                name: "Buddy",
+                type: "dog",
+                breed: "Beagle",
+                age: "5 years",
+                ageGroup: "adult",
+                emoji: "🐕",
+                description: "Buddy is a stubborn but lovable Beagle. He has a nose for adventure and loves sniffing out treats!",
+                fullDescription: "Buddy is a charming Beagle with a big personality. He's curious and loves following scents on walks. Buddy is good-natured and enjoys the company of his humans. He can be stubborn during training but responds well to treats and positive reinforcement. Buddy would be happiest in a secure, fenced yard where he can safely explore.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 6,
+                name: "Mittens",
+                type: "cat",
+                breed: "Tabby",
+                age: "8 years",
+                ageGroup: "senior",
+                emoji: "🐱",
+                description: "Mittens is a gentle senior cat who prefers a quiet home. She's sweet and loves being the center of attention.",
+                fullDescription: "Mittens is a serene and loving senior cat who deserves a peaceful, loving home in her golden years. She's calm, affectionate, and enjoys lounging in sunny spots. Mittens would be perfect for a quiet household, perhaps a senior person or couple looking for a calm companion. She still has many years of love to give.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 7,
+                name: "Daisy",
+                type: "rabbit",
+                breed: "Holland Lop",
+                age: "1.5 years",
+                ageGroup: "young",
+                emoji: "🐰",
+                description: "Daisy is a cute Holland Lop rabbit with soft fur. She's gentle and enjoys vegetables and quiet time.",
+                fullDescription: "Daisy is an adorable Holland Lop rabbit with a calm temperament. She enjoys fresh vegetables, hay, and gentle petting. Daisy loves binkying around an outdoor pen. She needs a spacious cage and regular exercise. Daisy would be perfect for someone interested in rabbit care and looking for a quiet, gentle companion.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 8,
+                name: "Rocky",
+                type: "dog",
+                breed: "German Shepherd Mix",
+                age: "6 years",
+                ageGroup: "adult",
+                emoji: "🐕",
+                description: "Rocky is a loyal and protective German Shepherd mix. He's smart and responds well to training.",
+                fullDescription: "Rocky is an intelligent and loyal German Shepherd mix who would make an excellent family guardian. He's well-trained, obedient, and protective of his family. Rocky needs consistent training and exercise. He's best suited for an experienced dog owner with a secure, fenced yard. Rocky will reward you with unwavering loyalty and protection.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            },
+            {
+                id: 9,
+                name: "Oliver",
+                type: "cat",
+                breed: "British Shorthair",
+                age: "3 years",
+                ageGroup: "adult",
+                emoji: "🐱",
+                description: "Oliver is a dignified British Shorthair with a plush gray coat. He's independent but occasionally affectionate.",
+                fullDescription: "Oliver is an elegant British Shorthair with a calm and dignified demeanor. He's independent and prefers his own space but enjoys gentle interaction on his own terms. Oliver is quiet and wouldn't mind being an only pet. He would be ideal for someone who appreciates a more reserved but elegant feline companion.",
+                vaccinated: "Yes",
+                neutered: "Yes"
+            }
+        ];
+
+        // Initialize gallery
+        function initializeGallery() {
+            displayPets(pets);
+        }
+
+        // Display pets
+        function displayPets(petsToDisplay) {
+            const petsGrid = document.getElementById('petsGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (petsToDisplay.length === 0) {
+                petsGrid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            petsGrid.innerHTML = petsToDisplay.map(pet => `
+                <div class="pet-card">
+                    <div class="pet-image">${pet.emoji}</div>
+                    <div class="pet-info">
+                        <div class="pet-header">
+                            <div class="pet-name">${pet.name}</div>
+                            <span class="pet-badge">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</span>
+                        </div>
+                        <div class="pet-type">${pet.breed}</div>
+                        <div class="pet-details">
+                            <span class="detail-tag">📅 ${pet.age}</span>
+                            <span class="detail-tag">💉 Vaccinated</span>
+                        </div>
+                        <p class="pet-description">${pet.description}</p>
+                        <div class="pet-actions">
+                            <button class="view-btn" onclick="openPetModal(${pet.id})">View Details</button>
+                            <button class="adopt-btn" onclick="adoptPet(${pet.id}, '${pet.name}')">Adopt Me</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Open pet detail modal
+        function openPetModal(petId) {
+            const pet = pets.find(p => p.id === petId);
+            const modal = document.getElementById('petModal');
+            const content = document.getElementById('petDetailContent');
+
+            content.innerHTML = `
+                <div class="pet-detail-header">
+                    <div class="pet-detail-image">${pet.emoji}</div>
+                    <div class="pet-detail-info">
+                        <h2>${pet.name}</h2>
+                        <p><strong>Breed:</strong> ${pet.breed}</p>
+                        <p><strong>Age:</strong> ${pet.age}</p>
+                        <p><strong>Type:</strong> ${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</p>
+                        <div class="pet-detail-specs">
+                            <div class="spec-item">
+                                <div class="spec-label">Vaccinated</div>
+                                <div class="spec-value">${pet.vaccinated}</div>
+                            </div>
+                            <div class="spec-item">
+                                <div class="spec-label">Neutered/Spayed</div>
+                                <div class="spec-value">${pet.neutered}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pet-description-full">
+                    <p>${pet.fullDescription}</p>
+                </div>
+
+                <div class="form-section">
+                    <h3>📋 Start Your Adoption Process</h3>
+                    <div class="success-message" id="successMsg">Thank you! We've received your adoption inquiry. Our team will contact you soon!</div>
+                    
+                    <form onsubmit="handleAdoptionForm(event, ${pet.id}, '${pet.name}')">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="homeType">Type of Home *</label>
+                            <select id="homeType" required>
+                                <option value="">Select...</option>
+                                <option value="house">House</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="condo">Condo</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Tell us about yourself and why ${pet.name} would be perfect for you *</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Adoption Application</button>
+                    </form>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closePetModal() {
+            document.getElementById('petModal').style.display = 'none';
+        }
+
+        // Handle adoption form
+        function handleAdoptionForm(event, petId, petName) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = {
+                petId: petId,
+                petName: petName,
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                homeType: document.getElementById('homeType').value,
+                message: document.getElementById('message').value,
+                submittedAt: new Date().toLocaleString()
+            };
+
+            // Show success message
+            const successMsg = document.getElementById('successMsg');
+            successMsg.style.display = 'block';
+
+            // Reset form
+            event.target.reset();
+
+            // Log submission (in a real application, this would be sent to a server)
+            console.log('Adoption Application Submitted:', formData);
+
+            // Clear success message after 5 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        }
+
+        // Adopt pet (quick action)
+        function adoptPet(petId, petName) {
+            openPetModal(petId);
+            setTimeout(() => {
+                document.getElementById('fullName').focus();
+            }, 100);
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
+            const ageFilter = document.getElementById('ageFilter').value;
+            const breedFilter = document.getElementById('breedFilter').value.toLowerCase();
+            const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
+
+            const filtered = pets.filter(pet => {
+                const matchType = !typeFilter || pet.type === typeFilter;
+                const matchAge = !ageFilter || pet.ageGroup === ageFilter;
+                const matchBreed = !breedFilter || pet.breed.toLowerCase().includes(breedFilter);
+                const matchName = !nameFilter || pet.name.toLowerCase().includes(nameFilter);
+
+                return matchType && matchAge && matchBreed && matchName;
+            });
+
+            displayPets(filtered);
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('typeFilter').value = '';
+            document.getElementById('ageFilter').value = '';
+            document.getElementById('breedFilter').value = '';
+            document.getElementById('nameFilter').value = '';
+            displayPets(pets);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('petModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeGallery);
+    </script>
+</body>
+</html>
